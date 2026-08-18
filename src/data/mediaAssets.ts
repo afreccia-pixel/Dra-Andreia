@@ -11,6 +11,7 @@ export interface ImageAsset {
 /**
  * Resolves a public asset path taking into account Vite's base URL (e.g. for GitHub Pages).
  * Handles external URLs, data URLs, and properly trims relative slashes.
+ * Strictly idempotent: prevents duplicate repository base prefixes (e.g. /Dra-Andreia/Dra-Andreia/).
  */
 export function getPublicAssetUrl(filePath: string): string {
   if (!filePath) return "";
@@ -25,10 +26,28 @@ export function getPublicAssetUrl(filePath: string): string {
     return filePath;
   }
 
+  const rawBase = import.meta.env.BASE_URL || "/";
+  // Ensure base starts and ends with a slash (e.g. "/Dra-Andreia/")
+  const normalizedBase = rawBase.startsWith("/")
+    ? (rawBase.endsWith("/") ? rawBase : `${rawBase}/`)
+    : `/${rawBase.endsWith("/") ? rawBase : `${rawBase}/`}`;
+
+  // Extract base segment name without slashes, e.g. "Dra-Andreia"
+  const baseSegment = normalizedBase.replace(/^\/+|\/+$/g, "");
+
   // Remove any leading slashes or "./"
-  const cleanPath = filePath.replace(/^(\.\/|\/)+/, "");
-  const base = import.meta.env.BASE_URL || "./";
-  const normalizedBase = base.endsWith("/") ? base : `${base}/`;
+  let cleanPath = filePath.replace(/^(\.\/|\/)+/, "");
+
+  // Strip duplicate base segment from cleanPath as many times as it might appear
+  if (baseSegment) {
+    const basePattern = new RegExp(`^(${baseSegment}\\/)+`, "i");
+    cleanPath = cleanPath.replace(basePattern, "");
+  }
+
+  // If cleanPath is now empty (e.g., filePath was just the base directory), return normalizedBase
+  if (!cleanPath) {
+    return normalizedBase;
+  }
 
   return `${normalizedBase}${cleanPath}`;
 }
