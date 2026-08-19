@@ -3,7 +3,6 @@ import { CLINIC_INFO, TESTIMONIALS_DATA } from "../data/clinicData";
 import { getOptimizedImageUrl, handleImageError } from "../data/mediaAssets";
 import { 
   Star, 
-  MessageSquare, 
   CheckCircle2, 
   ExternalLink,
   ShieldCheck
@@ -14,9 +13,7 @@ interface DepoimentosPageProps {
   onNavigate: (path: string) => void;
 }
 
-export const DepoimentosPage: React.FC<DepoimentosPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${CLINIC_INFO.phoneRaw}?text=${encodeURIComponent("Olá, Dra. Andreia! Vi os depoimentos no site e gostaria de agendar uma consulta de avaliação.")}`;
-
+export const DepoimentosPage: React.FC<DepoimentosPageProps> = ({ onNavigate: _onNavigate }) => {
   useEffect(() => {
     updatePageSeo(
       "/depoimentos",
@@ -44,10 +41,15 @@ export const DepoimentosPage: React.FC<DepoimentosPageProps> = ({ onNavigate }) 
           </p>
 
           <div className="pt-2">
-            <span className="inline-flex items-center gap-2 bg-white text-[#B98278] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-[#B98278]/30 shadow-2xs">
+            <a
+              href={CLINIC_INFO.googleReviewsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-white hover:bg-[#FAF7F5] text-[#B98278] hover:text-[#A36F66] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider border border-[#B98278]/30 shadow-2xs transition-colors"
+            >
               <ShieldCheck className="w-4 h-4 text-[#B98278]" />
-              Sincronizado com Google Reviews (5.0★ - 48+ Avaliações)
-            </span>
+              Sincronizado com Perfil Oficial no Google Reviews ({CLINIC_INFO.googleRating.toFixed(1)}★)
+            </a>
           </div>
         </div>
       </section>
@@ -111,38 +113,25 @@ export const DepoimentosPage: React.FC<DepoimentosPageProps> = ({ onNavigate }) 
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
             <a
-              href="https://www.google.com/search?q=Dra+Andreia+Medeiros+Ortodontista+Balneario+Camboriu+avaliacoes"
+              href={CLINIC_INFO.googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white hover:bg-[#FAF7F5] text-[#25282B] font-bold px-6 py-3 rounded-full text-xs uppercase tracking-wider border border-[#EAE3DF] shadow-2xs transition-all active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#B98278] hover:bg-[#A36F66] text-white font-bold px-6 py-3 rounded-full text-xs uppercase tracking-wider shadow-xs transition-all active:scale-95"
             >
-              <span>Ver Perfil Oficial no Google</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#B98278]" />
+              <span>Ver Perfil e Avaliações no Google</span>
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
-          </div>
-        </div>
-      </section>
 
-      {/* Bottom CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#F5F0ED] text-[#25282B] rounded-2xl p-8 text-center space-y-4 border border-[#EAE3DF] shadow-2xs">
-          <h3 className="text-2xl font-sans font-light text-[#25282B]">
-            Venha fazer parte do nosso grupo de <strong className="font-bold text-[#25282B]">pacientes satisfeitos</strong>
-          </h3>
-          <p className="text-xs text-[#55585B] max-w-lg mx-auto">
-            Atendimento presencial na De Poli Saúde (Rua 3130, 149 - Centro, Balneário Camboriú - SC).
-          </p>
-          <div>
             <a
-              href={whatsappUrl}
+              href={CLINIC_INFO.googleReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#B98278] hover:bg-[#A36F66] text-white font-bold px-7 py-3.5 rounded-full text-xs uppercase tracking-wider shadow-xs transition-all active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-[#FAF7F5] text-[#25282B] font-bold px-6 py-3 rounded-full text-xs uppercase tracking-wider border border-[#EAE3DF] shadow-2xs transition-all active:scale-95"
             >
-              <MessageSquare className="w-4 h-4" />
-              <span>Agendar Consulta no WhatsApp (47) 99602-6397</span>
+              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+              <span>Deixar Avaliação no Google</span>
             </a>
           </div>
         </div>
