@@ -139,12 +139,14 @@ function injectStructuredData(
     ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "5.0",
+      "ratingValue": `${CLINIC_INFO.googleRating.toFixed(1)}`,
       "reviewCount": `${CLINIC_INFO.googleReviewCount}`,
       "bestRating": "5",
       "worstRating": "1"
     },
-    "sameAs": []
+    "sameAs": [
+      CLINIC_INFO.googleReviewsUrl
+    ]
   };
 
   const schemaGraph: any[] = [localBusinessSchema];

@@ -24,7 +24,9 @@ export const CLINIC_INFO: ClinicInfo = {
     fullText: "Segunda a sexta, das 9h às 12h e das 13h30 às 18h"
   },
   googleRating: 5.0,
-  googleReviewCount: 48,
+  googleReviewCount: 15,
+  googleReviewsUrl: "https://share.google/htrjBN3REa7nJqwAY",
+  googleSearchUrl: "https://www.google.com/search?kgmid=/g/11r_v2nd_5&hl=pt-BR&q=Dra+Andreia+Medeiros+-+Invisalign+Doctor",
   coordinates: {
     lat: -26.9935,
     lng: -48.6358

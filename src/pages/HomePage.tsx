@@ -85,14 +85,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="order-2 lg:order-1 lg:col-span-6 space-y-5 text-center lg:text-left">
               
               {/* Rating positioned above the title */}
-              <div className="flex items-center justify-center lg:justify-start gap-2 text-xs sm:text-xs text-[#55585B]">
+              <a
+                href={CLINIC_INFO.googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center lg:justify-start gap-2 text-xs sm:text-xs text-[#55585B] hover:text-[#B98278] transition-colors group cursor-pointer"
+                title="Ver avaliações no Google da Dra. Andreia Medeiros"
+              >
                 <div className="flex items-center text-amber-500 text-sm leading-none">
                   {"★".repeat(5)}
                 </div>
-                <span className="font-bold text-[#25282B]">5.0 Google Reviews</span>
+                <span className="font-bold text-[#25282B] group-hover:text-[#B98278] transition-colors">{CLINIC_INFO.googleRating.toFixed(1)} no Google Reviews</span>
                 <span className="text-[#C8BEB7]">·</span>
-                <span className="text-[#55585B]">48+ Avaliações Reais</span>
-              </div>
+                <span className="text-[#55585B] group-hover:underline">Avaliações de Pacientes</span>
+              </a>
 
               {/* Headline */}
               <h1 className="text-[1.75rem] sm:text-4xl lg:text-5xl font-sans font-light text-[#25282B] leading-[1.2] lg:leading-[1.15] tracking-tight">

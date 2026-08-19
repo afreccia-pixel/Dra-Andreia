@@ -77,6 +77,8 @@ export interface ClinicInfo {
   };
   googleRating: number;
   googleReviewCount: number;
+  googleReviewsUrl: string;
+  googleSearchUrl?: string;
   coordinates: {
     lat: number;
     lng: number;
