@@ -26,8 +26,15 @@ export function getPublicAssetUrl(filePath: string): string {
     return filePath;
   }
 
-  const rawBase = import.meta.env.BASE_URL || "/";
-  // Ensure base starts and ends with a slash (e.g. "/Dra-Andreia/")
+  const rawBase = (import.meta.env.BASE_URL || "./").trim();
+
+  // Handle relative base like "./", "." or empty
+  if (rawBase === "./" || rawBase === "." || rawBase === "") {
+    const cleanPath = filePath.replace(/^(\.\/|\/)+/, "");
+    return cleanPath ? `./${cleanPath}` : "./";
+  }
+
+  // Ensure root-relative base starts and ends with a slash (e.g. "/Dra-Andreia/" or "/")
   const normalizedBase = rawBase.startsWith("/")
     ? (rawBase.endsWith("/") ? rawBase : `${rawBase}/`)
     : `/${rawBase.endsWith("/") ? rawBase : `${rawBase}/`}`;
