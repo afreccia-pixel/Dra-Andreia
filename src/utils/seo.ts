@@ -107,8 +107,8 @@ function injectStructuredData(
     "telephone": CLINIC_INFO.phone,
     "email": CLINIC_INFO.email,
     "priceRange": "$$",
-    "image": "https://draandreiamedeiros.com.br/fachada-clinica-depoli.webp",
-    "logo": "https://draandreiamedeiros.com.br/fachada-clinica-depoli.webp",
+    "image": "https://draandreiamedeiros.com.br/Draandreiaperfil.webp",
+    "logo": "https://draandreiamedeiros.com.br/draandreialogo.webp",
     "medicalSpecialty": ["Orthodontic", "Dentistry"],
     "address": {
       "@type": "PostalAddress",
